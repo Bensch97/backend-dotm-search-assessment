@@ -29,17 +29,26 @@ def file_search(char, diir):
     print "Total dotm files matched: {}".format(matches)
 
 def main():
-    if len(sys.argv) < 3:
-        if len(sys.argv) < 2:
-            print 'usage: ./dotm_search.py {--text | --dir}'
+    directory = "."
+    if len(sys.argv) > 2:
+        if len(sys.argv) > 3:
+            if sys.argv[2] == '--dir':
+                character = sys.argv[1]
+                directory = sys.argv[3]
+                file_search(character, directory)
+            else:
+                print 'usage: ./dotm_search.py character --dir dir'
             sys.exit(1)
         else:
-            character = sys.argv[1]
-            directory = "./dotm_files"
-            file_search(character, directory)
-    character = sys.argv[1]
-    directory = sys.argv[2]
-    file_search(character, directory)
+            print 'usage: ./dotm_search.py character --dir dir'
+            sys.exit(1)
+    elif len(sys.argv) > 1:
+        character = sys.argv[1]
+        file_search(character, directory)
+    else:
+        print 'usage: ./dotm_search.py character --dir dir'
+        sys.exit(1)
+        
 
 if __name__ == '__main__':
   main()
